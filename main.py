@@ -23,6 +23,8 @@ def si(image):
     mean    : SI Mean
     rms     : SI Root-Mean-Square
     stddev  : SI Standard Deviation
+    
+    More info: http://ieeexplore.ieee.org/document/6603194/
     """
 	h_sobel = sobel(image, 0)
 	v_sobel = sobel(image, 1)
@@ -49,6 +51,8 @@ def mse(reference, query):
 	Return
 	----------
 	value    : MSE value
+	
+	More info: https://bitbucket.org/kuraiev/pymetrikz
 	"""
 	(ref, que) = (reference.astype('double'), query.astype('double'))
 	diff = ref - que
@@ -70,6 +74,8 @@ def psnr(reference, query, normal=255):
 	Return
 	----------
 	value    : PSNR value
+	
+	More info: https://bitbucket.org/kuraiev/pymetrikz
 	"""
 	normalization = float(normal)
 	msev = mse(reference, query)
@@ -92,6 +98,8 @@ def ssim(reference, query):
 	Return
 	----------
 	value    : SSIM value
+	
+	More info: https://bitbucket.org/kuraiev/pymetrikz
 	"""
 	def __get_kernels():
 		k1, k2, l = (0.01, 0.03, 255.0)
@@ -149,6 +157,8 @@ def pwssim(reference, ref_gs, query):
 	Return
 	----------
 	value    : PWSSIM value
+	
+	More info: http://ieeexplore.ieee.org/document/7069106/
 	"""
 	si_value = [] # SI values for each block
 	ssim_value = [] # SSIM values for each block
