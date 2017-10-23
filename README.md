@@ -1,5 +1,6 @@
 # LSB-Image-Steganography
 Image steganography with one or more Least Significant Bits.
+
 Quality metrics used for assessment:
   - Spatial Information
     (http://ieeexplore.ieee.org/document/6603194/)
