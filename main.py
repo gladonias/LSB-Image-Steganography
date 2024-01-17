@@ -1,13 +1,11 @@
 import numpy as np
 from PIL import Image
-from itertools import izip
 from scipy.ndimage import sobel
-from scipy.misc import imread, imsave
 from matplotlib import pyplot as plt
 from scipy.fftpack import fftshift as __fftshift
-from scipy.ndimage.filters import convolve as __convolve
-from scipy.ndimage.filters import correlate as __correlate
-from scipy.ndimage.filters import gaussian_filter as __gaussian_filter
+from scipy.ndimage import convolve as __convolve
+from scipy.ndimage import correlate as __correlate
+from scipy.ndimage import gaussian_filter as __gaussian_filter
 
 def si(image):
 	"""Computes the Spatial Information (SI) of an image.
@@ -197,7 +195,7 @@ def set_lsb(value, bit, lsb):
 def get_pixel_pairs(iterable):
 	""" It takes in the pixel list and returns the pairs back. """
 	a = iter(iterable)
-	return izip(a, a)
+	return zip(a, a)
 
 def get_lsb(value, lsb):
 	""" It'll take in an RGBA value and use a bit mask to get
@@ -219,7 +217,7 @@ def hide_message(carrier, message, output, num_bits):
 	message += chr(0)
 	while (1.0 * len(message) / num_bits) != int(len(message) / num_bits):
 		message += chr(0)
-	print"The hidden message contains", len(message), "characters."
+	print("The hidden message contains {} characters.".format(len(message)))
 	c_image = Image.open(carrier)
 	c_image = c_image.convert('RGBA')
 	out = Image.new(c_image.mode, c_image.size)
@@ -233,7 +231,7 @@ def hide_message(carrier, message, output, num_bits):
 		raise ValueError('Too much data for carrier image.')
 
 	# Looping over each character in the message
-	for i in range(0, (len(message) / num_bits)):
+	for i in range(0, int(len(message) / num_bits)):
 		cb = ""
 		for j in range((i * num_bits), (i * num_bits + num_bits)):
 			# Converting each characther to an int.
@@ -259,7 +257,7 @@ def hide_message(carrier, message, output, num_bits):
 
 	out.putdata(new_array)
 	out.save(output)
-	print "Output image saved as", output
+	print("Output image saved as {}.".format(output))
 
 def extract_message(steg_image, num_bits):
 	# Image object from the filename passed
